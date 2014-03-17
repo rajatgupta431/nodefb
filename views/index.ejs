@@ -1,0 +1,18 @@
+<html><head> <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<% if (user==null){%>
+        <h2>Welcome! Please log in.</h2>
+       
+<a href="/auth/facebook"><img src="/images/login-with-facebook.png" width="154" height="22"></a> 
+        	<%}%>
+
+<% if (user!=null){%>
+	<h2><a href= '/feeds'>Click here to get the group feeds </a> </h2><br>
+<h2>	<a href= '/members'>Click here to get the group members </a></h2>
+	<%}%>
+
+</body>
+</html>
