@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -115,7 +114,7 @@ function(err,response,body)
 {
 	if(!err){ console.log(body);
 	
-	res.json(body)
+	res.send(body)
 } 
 else console.log(err);
 	
@@ -141,7 +140,7 @@ app.get('/members',function(req,res){
 function(err,response,body)
 {
 	if(!err){ console.log(body);
-	res.json(body);
+	res.send(body);
 } 
 else console.log(err);
 	
