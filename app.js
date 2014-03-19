@@ -8,7 +8,7 @@ var routes = require('./routes');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
-
+var fs= require('fs');
  var passport = require('passport')
   , util = require('util')
   , FacebookStrategy = require('passport-facebook').Strategy;
@@ -99,13 +99,14 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-
+ var i = 1; //counter to see the number of requests made
 app.get('/feeds',function(req,res){
-	
-		
-		console.log(req.user);
-		
-			request({uri : "https://graph.facebook.com/125499867491756/feed/?access_token="+req.user.token,
+     
+	res.send("Please see the terminal for the progress");
+		function allFeeds(URL){
+
+
+			request({uri : URL,
 						 
 					 timeout : 15000,
 					  method : "GET"
@@ -113,26 +114,38 @@ app.get('/feeds',function(req,res){
 
 function(err,response,body)
 {
-	if(!err){ console.log(body);
-	
-	res.json(body)
+	if(!err){ 
+		
+		console.log("REQUEST NUMBER :"+ i);
+		++i;
+		if(JSON.parse(body).data[0]==null){ console.log("Congratulations !!! , you have successfully scraped the group ");
+		return;}
+		console.log(JSON.parse(body).paging.next);
+		fs.appendFile('feeds.json',JSON.stringify(JSON.parse(body)) , function (err) {
+
+});
+		
+	allFeeds(JSON.parse(body).paging.next);
 } 
 else console.log(err);
 	
    });
 		
 			
+}
 
+allFeeds( "https://graph.facebook.com/125499867491756/feed/?access_token="+req.user.token);
 	
 	
 	});
 
 app.get('/members',function(req,res){
 	
-		
-		console.log(req.user);
-		
-			request({uri : "https://graph.facebook.com/125499867491756/members/?access_token="+req.user.token,
+		res.send("Please see the terminal for the progress");
+		function allMembers(URL){
+
+
+			request({uri : URL,
 						 
 					 timeout : 15000,
 					  method : "GET"
@@ -140,14 +153,28 @@ app.get('/members',function(req,res){
 
 function(err,response,body)
 {
-	if(!err){ console.log(body);
-	res.json(body);
+	if(!err){ 
+		
+		console.log("REQUEST NUMBER :"+ i);
+		++i;
+		if(JSON.parse(body).data[0]==null){ console.log("Congratulations !!! , you have successfully scraped all the members ");
+		return;}
+		console.log(JSON.parse(body).paging.next);
+		fs.appendFile('members.json',JSON.stringify(JSON.parse(body)) , function (err) {
+
+});
+		
+	allMembers(JSON.parse(body).paging.next);
 } 
 else console.log(err);
 	
    });
 		
 			
+}
+
+allMembers( "https://graph.facebook.com/125499867491756/members/?access_token="+req.user.token);
+	
 
 	
 	
