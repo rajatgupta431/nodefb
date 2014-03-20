@@ -22,8 +22,8 @@ var app = express();
 
 
 
-var FACEBOOK_APP_ID = "491359790986749";
-var FACEBOOK_APP_SECRET = '7a26425e89a1ea548806adfd717c80a6';
+var FACEBOOK_APP_ID = "1483062015250550";
+var FACEBOOK_APP_SECRET = 'e6c53e9c7581c33d293331b489113b6d';
 
 
 
@@ -208,7 +208,9 @@ function(err,response,body)
 
 });
 		
-if(i%6==0) setTimeout(function(){allMessages(JSON.parse(body).paging.next);},8*60*1000);
+if(i%6==0){ console.log("====================WAIT for another 8 minutes for the next request===========================");
+	setTimeout(function(){allMessages(JSON.parse(body).paging.next);},8*60*1000);
+}
 	else 
 	allMessages(JSON.parse(body).paging.next);
 } 
