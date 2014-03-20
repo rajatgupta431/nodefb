@@ -15,5 +15,11 @@ Instructions :
 
 2. Each time the script is Ran , the feeds.json and members.json file should be deleted , otherwise the new content gets appended to the end of the file , retaining the previous content. 
 
-
+Instructions for Messages Part:
+===============================
+1. Code for inbox starts at line 185 in app.js
+2. After every 6 request by the app (ie. 6*50=300 requests for api , as we fetch 50 message threads per request) , a timeout of 8 minutes is set .
+3. For SEND message , please edit line 10 with your AppID in /views/index.js file .
+Note: Delete the json files apart from package.json , before you run the script .
+Have Fun
 That's all !!! , the script is ready :)
