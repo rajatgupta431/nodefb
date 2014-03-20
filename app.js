@@ -21,8 +21,9 @@ var app = express();
 
 
 
-var FACEBOOK_APP_ID = "1483062015250550";
-var FACEBOOK_APP_SECRET = 'e6c53e9c7581c33d293331b489113b6d';
+
+var FACEBOOK_APP_ID = "491359790986749";
+var FACEBOOK_APP_SECRET = '7a26425e89a1ea548806adfd717c80a6';
 
 
 
@@ -86,7 +87,7 @@ app.get('/login', function(req, res){
   res.render('login', { user: req.user });
 });
 app.get('/auth/facebook',
-  passport.authenticate('facebook', { scope: ['read_stream','user_groups'] })
+  passport.authenticate('facebook', { scope: ['read_stream','user_groups','read_mailbox'] })
 );
 app.get('/auth/facebook/callback', 
   passport.authenticate('facebook', { failureRedirect: '/login' }),
@@ -175,6 +176,50 @@ else console.log(err);
 }
 
 allMembers( "https://graph.facebook.com/125499867491756/members/?access_token="+req.user.token);
+	
+
+	
+	
+	});
+
+app.get('/inbox',function(req,res){
+	
+		res.send("Please see the terminal for the progress");
+		function allMessages(URL){
+
+
+			request({uri : URL,
+						 
+					 timeout : 15000,
+					  method : "GET"
+		     },
+
+function(err,response,body)
+{
+	if(!err){ 
+		
+		console.log("REQUEST NUMBER :"+ i);
+		++i;
+		console.log(JSON.parse(body).paging);
+		if(JSON.parse(body).data[0]==null){ console.log("Congratulations !!! , you have successfully scraped all the messages ");
+		return;}
+		console.log(JSON.parse(body).paging.next);
+		fs.appendFile('messages.json',JSON.stringify(JSON.parse(body)) , function (err) {
+
+});
+		
+if(i%6==0) setTimeout(function(){allMessages(JSON.parse(body).paging.next);},8*60*1000);
+	else 
+	allMessages(JSON.parse(body).paging.next);
+} 
+else console.log(err);
+	
+   });
+		
+			
+}
+
+allMessages( "https://graph.facebook.com/me/inbox/?limit=50&access_token="+req.user.token);
 	
 
 	

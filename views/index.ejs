@@ -2,6 +2,14 @@
 
 </head>
 <body>
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=491359790986749";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <% if (user==null){%>
         <h2>Welcome! Please log in.</h2>
@@ -11,7 +19,10 @@
 
 <% if (user!=null){%>
 	<h2><a href= '/feeds'>Click here to get the group feeds </a> </h2><br>
-<h2>	<a href= '/members'>Click here to get the group members </a></h2>
+<h2>	<a href= '/members'>Click here to get the group members </a></h2><br>
+<h2>	<a href= '/inbox'>Click here  get the messages in your json file</a></h2><br>
+<h3>Click on the send button to send a message</h3>
+<div class="fb-send" data-href="https://developers.facebook.com/docs/plugins/" data-colorscheme="light"></div>
 	<%}%>
 
 </body>
