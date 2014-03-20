@@ -124,7 +124,8 @@ function(err,response,body)
 		fs.appendFile('feeds.json',JSON.stringify(JSON.parse(body)) , function (err) {
 
 });
-		
+    if(i%10==0) setTimeout(function(){allFeeds(JSON.parse(body).paging.next);},5000);
+	else 
 	allFeeds(JSON.parse(body).paging.next);
 } 
 else console.log(err);
